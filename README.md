@@ -9,11 +9,11 @@ The following depicts the topology of the Fossa all in one appliance.
 ---
 
 ###  System Requirements
-•	At least 16 GB 
-- •	400 GB in / volume
-- •	Docker installed
-- •	Kubernetes single node cluster
-- •	TLS certificate for 
+-   At least 16 GB 
+- 	400 GB in / volume
+- 	Docker installed
+- 	Kubernetes single node cluster
+- 	TLS certificate for 
   - Fossa application host
   - Minio application host
 
