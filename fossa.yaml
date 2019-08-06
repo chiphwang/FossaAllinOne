@@ -133,7 +133,7 @@ metadata:
   name: fossa-agent-deployment
   namespace: fossa
 spec:
-  replicas: 2
+  replicas: 4
   revisionHistoryLimit: 2
   template:
     metadata:
