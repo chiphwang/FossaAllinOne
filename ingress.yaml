@@ -1,0 +1,47 @@
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: fossa-ingress
+  namespace: fossa
+spec:
+  tls:
+  - hosts:
+    - fossa.local
+    secretName:  tls-ssl-fossa   
+  rules:
+  - host: fossa.local
+    http:
+      paths:      
+      - path: /
+        backend:
+          serviceName: fossa
+          servicePort: 80
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: minio-ingress
+  namespace: fossa
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 2g
+    nginx.org/proxy-read-timeout:  15m
+    nginx.org/proxy-write-timeout: 15m
+
+spec:
+  tls:
+  - hosts:
+    - minio.local
+    secretName: tls-ssl-minio  
+  rules:
+  - host: minio.local
+    http:
+      paths:
+      - backend:
+          serviceName: minio
+          servicePort: 80
+        path: /  

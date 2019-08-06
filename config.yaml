@@ -1,0 +1,10 @@
+# FOSSA core + secrets 
+apiVersion: v1
+kind: Secret
+metadata:
+  name: quay.io
+  namespace: fossa
+data:
+  .dockerconfigjson: 
+
+

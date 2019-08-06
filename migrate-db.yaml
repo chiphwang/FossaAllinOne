@@ -1,0 +1,42 @@
+# Job file to configure the PostgreSQL server
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fossa-migrate
+  namespace: fossa
+spec:
+  template:
+    metadata:
+      labels:
+        app: fossa
+        tier: migration
+        deployment: production
+        mode: standard
+    spec:
+      automountServiceAccountToken: false
+      volumes:
+      - name: config-volume
+        configMap:
+          name: config
+      containers:
+      - name: fossa-core
+        image: quay.io/fossa/fossa:release
+        imagePullPolicy: IfNotPresent
+        command:
+        - /fossa/tsnode
+        - /fossa/tools/fossa
+        - sequelize
+        - db:migrate
+        env:
+        - name: SRCLIBPATH
+          value: /usr/local/.srclib-tc
+        - name: CONFIG_FILE
+          value: /etc/fossa/config/config.json
+        volumeMounts:
+        - mountPath: /etc/fossa/config
+          name: config-volume
+      restartPolicy: Never
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: quay.io
+  backoffLimit: 1
