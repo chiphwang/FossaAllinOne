@@ -19,7 +19,11 @@ The following depicts the topology of the Fossa all in one appliance.
 
 
 
-## Setup Script steps
+## Kubernetes Setup
+
+To deploy a Kubernetes single node cluster use the instructions from the following link.
+
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
 
 * run_docker.sh
     1. This script will build a docker container with the included docker file
