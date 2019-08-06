@@ -14,8 +14,8 @@ The following depicts the topology of the Fossa all in one appliance.
 - 	Docker installed
 - 	Kubernetes single node cluster
 - 	TLS certificate for 
-  - Fossa application host
-  - Minio application host
+-  - Fossa application host
+-  - Minio application host
 
 
 
