@@ -44,16 +44,16 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-clu
 
 
 
-### Running `app.py`
+### Deploy Fossa 
 
-2.	Create Fossa Namespace
+**1. Create Fossa Namespace**
 kubectl create ns fossa
 
 
 
-3.	Modify config.yaml file and create image pull secret to download Fossa images
-# Modify config.yaml 
-# Encode the key provided by Fossa prior to adding to data:
+**2. Modify config.yaml file and create image pull secret to download Fossa images**
+_Modify config.yaml_ 
+_Encode the key provided by Fossa prior to adding to data:_
 
 apiVersion: v1
 kind: Secret
@@ -62,16 +62,15 @@ metadata:
   namespace: fossa
 data:
   .dockerconfigjson:
-data: < image pull secret>
-
+data: **< image pull secret>**
 
 
 kubectl create -f config.yaml
 
 
-4.	Modify configmap.yaml with required parameters and create config ConfigMap
+**4.Modify configmap.yaml with required parameters and create config ConfigMap**
 
-# Modify configmap.yaml
+_Modify configmap.yaml_
 
 secret: <64-bit string that will be used to encrypt data stored in database>
 app:
@@ -95,11 +94,11 @@ kubectl create -f configmap.yaml
 
 5.	Create Secrets for TLS certificates for fossa app and minio app. Create configmap minio app.
 
-# You will need to create 2 secrets which include the pem and key file for the chosen hostname for fossa application and the minio application. The pem  and key file will need to be renamed to tls.crt and tls.key before creating the secret. 
+_You will need to create 2 secrets which include the pem and key file for the chosen hostname for fossa application and the minio application. The pem  and key file will need to be renamed to tls.crt and tls.key before creating the secret._
 
-# You will also need to create a configmap with the pem file of the minio application.
+_You will also need to create a configmap with the pem file of the minio application._
 
-# Filenames must be named tls.crt and tls.key
+_Filenames must be named tls.crt and tls.key_
 
 Fossa
 Kubecetl -n fossa create secret generic tls-ssl-fossa –from-file=./tls.key –from-file=./tls.crt
